@@ -89,13 +89,13 @@ move(goroom(2),
 go(S, G) :- plan(S, G, [S], []).
 
 test :- go([handempty, ontable(b, 1), ontable(c,1), on(a, b, 1), clear(c), clear(a), handroom(1)],
-	          [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(1)]).
+	          [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(2)]).
 
 test2 :- go([handempty, ontable(b, 1), ontable(c, 1), on(a, b, 1), clear(c), clear(a), handroom(1)],
 	          [handempty, ontable(a, 1), ontable(b, 1), on(c, b, 1), clear(a), clear(c), handroom(1)]).
 
-test3 :- go([handempty, ontable(d,1), ontable(c,1), on(c,b,1), on(b,a,1), clear(d), clear(a), handroom(1)],
-						[handempty, ontable(d,2), on(d,c,1), on(c,b,1), on(b,a,1), clear(a), handroom(2)]).
+test3 :- go([handempty, ontable(a,1), ontable(b,1), clear(a), clear(b), handroom(1)],
+						[handempty, ontable(b,2), on(a,b,2), clear(a), handroom(2)]).
 
 test4 :- go([handempty, ontable(b, 1), on(a, b, 1), clear(a), handroom(1)],
 							[handempty, ontable(b, 2), on(a, b, 2), clear(a),  handroom(1)]).
