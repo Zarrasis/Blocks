@@ -29,6 +29,7 @@ plan(State, Goal, _, Moves) :-	equal_set(State, Goal),
 
 %no idea, i think this is where we might IDFS
 plan(State, Goal, Been_list, Moves) :-
+
 				move(Name, Preconditions, Actions),
 				conditions_met(Preconditions, State),
 				change_state(State, Actions, Child_state),
@@ -75,12 +76,12 @@ move(stack(X, Y), [holding(X), clear(Y), handroom(R)],
 				  add(clear(X))]).
 
 % go to room 1
-move(goroom(1),
+move(goroom1,
 	[handroom(2)], [del(handroom(2)),
 		add(handroom(1))]).
 
 % go to room 2
-move(goroom(2),
+move(goroom2,
 	[handroom(1)],	[del(handroom(1)),
 		add(handroom(2))]).
 
