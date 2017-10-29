@@ -91,8 +91,8 @@ go(S, G) :- plan(S, G, [S], []).
 test :- go([handempty, ontable(b,1), ontable(c,1), on(a, b,1), clear(c), clear(a), handroom(1)],
 	          [handempty, ontable(c,1), on(a,b,1), on(b, c,1), clear(a), handroom(1)]).
 
-test2 :- go([handempty, ontable(b), ontable(c), on(a, b), clear(c), clear(a)],
-	          [handempty, ontable(a), ontable(b), on(c, b), clear(a), clear(c)]).
+test2 :- go([handempty, ontable(b,1), ontable(c,1), on(a, b,1), clear(c), clear(a), handroom(1)],
+	          [handempty, ontable(a,1), ontable(b,1), on(c, b,1), clear(a), clear(c), handroom(1)]).
 
 % 1 or 2 for what room its in
 test4 :- go([handempty, ontable(b,1),on(a, b, 1), clear(a), handroom(1)],
