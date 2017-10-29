@@ -10,10 +10,10 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Two Room Planner by Matthew Taubler and Brooke Norton
+%%% Two Room Planner implementation
+%%% Matthew Taubler and Brooke Norton
+%%% UCF CAP 4630 Fall 2017
 
-
-%add test(x)/0
 :- module( planner,
 	   [
 	       plan/4,change_state/3,conditions_met/2,member_state/2,
@@ -27,7 +27,6 @@ plan(State, Goal, _, Moves) :-	equal_set(State, Goal),
 				write('moves are'), nl,
 				reverse_print_stack(Moves).
 
-%no idea, i think this is where we might IDFS
 plan(State, Goal, Been_list, Moves) :-
 
 				move(Name, Preconditions, Actions),
@@ -90,7 +89,7 @@ move(goroom2,
 go(S, G) :- plan(S, G, [S], []).
 
 test :- go([handempty, ontable(b, 1), ontable(c,1), on(a, b, 1), clear(c), clear(a), handroom(1)],
-	          [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(2)]).
+	         [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(2)]).
 
 test2 :- go([handempty, ontable(b, 1), ontable(c, 1), on(a, b, 1), clear(c), clear(a), handroom(1)],
 	          [handempty, ontable(a, 1), ontable(b, 1), on(c, b, 1), clear(a), clear(c), handroom(1)]).
@@ -99,4 +98,4 @@ test3 :- go([handempty, ontable(a,1), ontable(b,1), clear(a), clear(b), handroom
 						[handempty, ontable(b,2), on(a,b,2), clear(a), handroom(2)]).
 
 test4 :- go([handempty, ontable(b, 1), on(a, b, 1), clear(a), handroom(1)],
-							[handempty, ontable(b, 2), on(a, b, 2), clear(a),  handroom(1)]).
+						[handempty, ontable(b, 2), on(a, b, 2), clear(a), handroom(1)]).
