@@ -10,14 +10,14 @@
 %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%% Two Room Planner implementation
-%%% Matthew Taubler and Brooke Norton
-%%% UCF CAP 4630 Fall 2017
+%%% Two Room Planner by Matthew Taubler and Brooke Norton
 
+
+%add test(x)/0
 :- module( planner,
 	   [
 	       plan/4,change_state/3,conditions_met/2,member_state/2,
-	       move/3,go/2,test/0,test2/0,test3/0,test4/0
+	       move/3,go/2,test/0,test2/0,test3/0,test4/0,test5/0
 	   ]).
 
 :- [utils].
@@ -27,8 +27,8 @@ plan(State, Goal, _, Moves) :-	equal_set(State, Goal),
 				write('moves are'), nl,
 				reverse_print_stack(Moves).
 
+%no idea, i think this is where we might IDFS
 plan(State, Goal, Been_list, Moves) :-
-
 				move(Name, Preconditions, Actions),
 				conditions_met(Preconditions, State),
 				change_state(State, Actions, Child_state),
@@ -75,12 +75,12 @@ move(stack(X, Y), [holding(X), clear(Y), handroom(R)],
 				  add(clear(X))]).
 
 % go to room 1
-move(goroom1,
+move(goroom(1),
 	[handroom(2)], [del(handroom(2)),
 		add(handroom(1))]).
 
 % go to room 2
-move(goroom2,
+move(goroom(2),
 	[handroom(1)],	[del(handroom(1)),
 		add(handroom(2))]).
 
@@ -89,7 +89,7 @@ move(goroom2,
 go(S, G) :- plan(S, G, [S], []).
 
 test :- go([handempty, ontable(b, 1), ontable(c,1), on(a, b, 1), clear(c), clear(a), handroom(1)],
-	         [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(2)]).
+	          [handempty, ontable(c, 1), on(a, b, 1), on(b, c, 1), clear(a), handroom(2)]).
 
 test2 :- go([handempty, ontable(b, 1), ontable(c, 1), on(a, b, 1), clear(c), clear(a), handroom(1)],
 	          [handempty, ontable(a, 1), ontable(b, 1), on(c, b, 1), clear(a), clear(c), handroom(1)]).
@@ -98,4 +98,7 @@ test3 :- go([handempty, ontable(a,1), ontable(b,1), clear(a), clear(b), handroom
 						[handempty, ontable(b,2), on(a,b,2), clear(a), handroom(2)]).
 
 test4 :- go([handempty, ontable(b, 1), on(a, b, 1), clear(a), handroom(1)],
-						[handempty, ontable(b, 2), on(a, b, 2), clear(a), handroom(1)]).
+							[handempty, ontable(b, 2), on(a, b, 2), clear(a),  handroom(1)]).
+
+test5 :- go([handempty, ontable(b, 1), ontable(c, 1), ontable(d,1), on(a, b, 1), clear(c),clear(d), clear(a), handroom(1)],
+							[handempty, ontable(a, 1), ontable(b, 1), on(c, b, 1), on(d,c,1), clear(a), clear(d), handroom(1)]).
